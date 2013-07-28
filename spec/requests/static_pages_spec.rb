@@ -1,63 +1,30 @@
 require 'spec_helper'
 
 describe "Static pages" do
-  def get_title(page_name)
-    "Ruby on Rails Tutorial Sample App | #{page_name}"
-  end
+  subject { page }
 
   describe "Home page" do
-    let(:url) { '/static_pages/home' }
-
-    it "should have the right title" do
-      visit url
-      expect(page).to have_title(get_title("Home"))
-    end
-
-    it "should have the content 'Sample App'" do
-      visit url
-      expect(page).to have_content('Sample App')
-    end
+    before { visit root_path }
+    it { should have_content('Sample App') }
+    it { should have_title(page_title) }
+    it { should_not have_title('| Home') }
   end
 
   describe "Help page" do
-    let(:url) { '/static_pages/help' }
-
-    it "should have the right title" do
-      visit url
-      expect(page).to have_title(get_title("Help"))
-    end
-
-    it "should have the content 'Help'" do
-      visit url
-      expect(page).to have_content('Help')
-    end
+    before { visit help_path }
+    it { should have_title(page_title("Help")) }
+    it { should have_content('Help') }
   end
 
   describe "About page" do
-    let(:url) { '/static_pages/about' }
-
-    it "should have the right title" do
-      visit url
-      expect(page).to have_title(get_title("About Us"))
-    end
-
-    it "should have the content 'About Us'" do
-      visit url
-      expect(page).to have_content('About Us')
-    end
+    before { visit about_path }
+    it { should have_title(page_title("About Us")) }
+    it { should have_content('About Us') }
   end
 
-  describe "Contacts page" do
-    let(:url) { '/static_pages/contacts' }
-
-    it "should have the right title" do
-      visit url
-      expect(page).to have_title(get_title("Contacts"))
-    end
-
-    it "should have the content 'Contacts'" do
-      visit url
-      expect(page).to have_content('Contacts')
-    end
+  describe "Contact page" do
+    before { visit contact_path }
+    it { should have_title(page_title("Contact")) }
+    it { should have_content('Contact') }
   end
 end
